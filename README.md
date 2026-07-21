@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-This project focuses on the statistical characterization of **Glomerular Basement Membrane (GBM) thickness distributions** in diabetic patients using Transmission Electron Microscopy (TEM) images and their corresponding segmentation masks.
+The primary objective of this project is to quantitatively analyze GBM thickness profiles from Transmission Electron Microscopy (TEM) images to investigate structural variations—specifically looking for **bi-modal or multi-modal thickness trends** in diabetic conditions.
 
 The project builds upon the automated GBM segmentation and thickness estimation pipeline developed by Curti et al. The current dataset contains pre-segmented GBM images collected from **11 diabetic patients**.
 
