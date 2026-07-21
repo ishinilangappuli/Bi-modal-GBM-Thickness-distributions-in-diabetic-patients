@@ -15,12 +15,12 @@ IMAGE_FOLDER = r"C:\Users\ishin\OneDrive\Desktop\Ishini\images"
 OUTPUT_CSV = os.path.join(IMAGE_FOLDER, "gbm_thickness_results.csv")
 OUTPUT_PLOT = os.path.join(IMAGE_FOLDER, "global_gbm_distribution.png")
 
-# Exact scale factor calculated from TEM scale bar (1 um = 1010 pixels)
+# Exact scale factor calculated from TEM scale bar
 NM_PER_PIXEL = 0.9901  
 
-# Physical validation bounds in nanometers (nm)
-MIN_VALID_NM = 10.0   # Artifact filter lower bound
-MAX_VALID_NM = 1500.0 # Artifact filter upper bound
+# Physical validation bounds in nm
+MIN_VALID_NM = 10.0   
+MAX_VALID_NM = 1500.0 
 
 # ==========================================
 # 2. HELPER FUNCTIONS
@@ -38,14 +38,15 @@ def process_single_image(image_path):
     """Processes a single binary mask image to compute GBM orthogonal thickness."""
     filename = os.path.basename(image_path)
     
-    # Extract Patient ID and Glomerulus ID from filename (e.g., '01-24_03_1g.tif')
+    # Extract Patient ID and Glomerulus ID from filename
     parts = filename.split('_')
     patient_id = parts[0] if len(parts) > 0 else "Unknown"
     glomerulus_id = parts[2].split('.')[0] if len(parts) > 2 else "Unknown"
     
     # Load image as binary mask
     img = Image.open(image_path).convert('L')
-    binary_mask = np.array(img) > 128  # Threshold foreground
+    # Threshold foreground
+    binary_mask = np.array(img) > 128  
     
     if not np.any(binary_mask):
         return []
@@ -62,7 +63,7 @@ def process_single_image(image_path):
     # Extract orthogonal thickness along the skeleton (2 * distance * scale)
     raw_thicknesses = dist_trans[skeleton] * 2.0 * NM_PER_PIXEL
     
-    # Filter out extreme noise / artifacts
+    # Filter out extreme noise 
     valid_thicknesses = raw_thicknesses[
         (raw_thicknesses >= MIN_VALID_NM) & (raw_thicknesses <= MAX_VALID_NM)
     ]
@@ -117,9 +118,11 @@ def main():
         print("No valid data processed. Please check image masks and path.")
         return
 
-    # Convert results summary to DataFrame and save to CSV
+    # Convert results summary to DataFrame 
     df = pd.DataFrame(all_results)
-    df_csv = df.drop(columns=["Raw_Values"])  # Exclude heavy array column from CSV
+    
+    # Exclude heavy array column from CSV
+    df_csv = df.drop(columns=["Raw_Values"]) 
     df_csv.to_csv(OUTPUT_CSV, index=False)
     print(f"\n Analysis results successfully saved to:\n   {OUTPUT_CSV}")
 
