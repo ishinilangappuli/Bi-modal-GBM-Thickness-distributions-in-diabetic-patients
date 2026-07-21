@@ -1,47 +1,66 @@
-# Bi-modal-GBM-Thickness-distributions-in-diabetic-patients
+# Bi-Modal GBM Thickness Distributions in Diabetic Patients
 
-Project Overview
+## 📌 Project Overview
 
-This project focuses on the statistical characterization of Glomerular Basement Membrane (GBM) thickness distributions in patients with diabetes using Transmission Electron Microscopy (TEM) images and their corresponding segmentation masks.
+This project focuses on the statistical characterization of **Glomerular Basement Membrane (GBM) thickness distributions** in diabetic patients using Transmission Electron Microscopy (TEM) images and their corresponding segmentation masks.
 
-The project builds upon the automated GBM segmentation and thickness estimation pipeline developed by Curti et al. The current dataset contains pre-segmented GBM images collected from 11 diabetic patients. The main objective is to analyze the distribution of individual GBM membrane thickness measurements and investigate the presence of uni-modal, bi-modal, or multi-modal patterns.
+The project builds upon the automated GBM segmentation and thickness estimation pipeline developed by Curti et al. The current dataset contains pre-segmented GBM images collected from **11 diabetic patients**.
 
-The analysis will provide an initial characterization of GBM thickness variability before extending the methodology to a larger dataset containing additional GBM components.
+The main objective is to analyze individual GBM membrane thickness measurements and investigate the presence of:
 
-Research Objective
+- Unimodal distributions
+- Bimodal distributions
+- Multimodal distributions
+- Localized variations in membrane thickness
+
+The initial analysis will characterize GBM thickness variability before extending the methodology to a larger dataset containing additional GBM components.
+
+---
+
+## 🎯 Research Objective
 
 The primary objective of this project is to:
 
-Characterize the distribution of GBM thickness measurements in diabetic patients and investigate whether the distributions exhibit significant bi-modal or multi-modal patterns.
+> **Characterize the distribution of GBM thickness measurements in diabetic patients and investigate whether the distributions exhibit significant bi-modal or multi-modal patterns.**
 
-The analysis will focus on:
+### Specific Objectives
 
-Measuring the thickness of individual segmented GBM membrane components.
-Investigating the variability of GBM thickness within and between patients.
-Identifying possible uni-modal, bi-modal, or multi-modal distributions.
-Characterizing the distribution of GBM thickness at patient and glomerulus levels.
-Quantifying localized variations in GBM thickness.
-Dataset
+- Measure the thickness of individual segmented GBM membrane components.
+- Investigate the variability of GBM thickness within and between patients.
+- Identify possible unimodal, bimodal, or multimodal distributions.
+- Characterize GBM thickness distributions at patient and glomerulus levels.
+- Quantify localized variations in GBM thickness.
 
-The preliminary dataset consists of segmented TEM images collected from 11 diabetic patients.
+---
 
-Each patient contains multiple views of the GBM, sampled from different glomeruli and slice positions. Each image may contain multiple membrane components. Therefore, individual segmented membrane components are treated as independent measurement units for the initial thickness characterization.
+## 📊 Dataset
 
-The hierarchical structure of the data can be represented as:
+The preliminary dataset consists of segmented TEM images collected from **11 diabetic patients**.
 
+Each patient contains multiple views of the GBM, sampled from different glomeruli and slice positions. A single image may contain multiple segmented membrane components.
+
+For the initial thickness characterization, **each segmented membrane component is treated as an individual measurement sample**.
+
+### Dataset Hierarchy
+
+```
 Patient
+   │
    └── Glomerulus
+          │
           └── TEM Image
-                 └── Multiple GBM Membrane Components
+                 │
+                 └── GBM Membrane Components
+                        │
                         └── Thickness Measurements
-
+```
 The dataset contains:
 
-11 patients
-Multiple glomeruli
-More than 10 images per patient
-Multiple segmented membrane components per image
-Research Hypothesis
+- 11 patients
+- Multiple glomeruli
+- More than 10 images per patient
+- Multiple segmented membrane components per image
+- Research Hypothesis
 
 The underlying hypothesis is that GBM thickness in diabetic patients may exhibit considerable heterogeneity.
 
@@ -49,14 +68,15 @@ Since a single image may contain multiple membrane components with different str
 
 The project investigates whether the observed thickness values exhibit:
 
-A unimodal distribution
-A bimodal distribution
-A multimodal distribution
-A prolonged right tail indicating localized membrane thickening
+- A unimodal distribution
+- A bimodal distribution
+- A multimodal distribution
+- A prolonged right tail indicating localized membrane thickening
+
 Methodology
 
 The analysis workflow consists of the following stages:
-
+```
 Pre-Segmented TEM Images
           ↓
 Segmentation Mask Processing
@@ -76,6 +96,7 @@ Multi-Modality Analysis
 Patient and Glomerulus-Level Characterization
           ↓
 Statistical Interpretation
+```
 Thickness Measurement
 
 The project utilizes computer vision-based thickness estimation methods applied to the provided segmentation masks.
@@ -141,6 +162,7 @@ Between patients
 This will help determine whether observed thickness variations are primarily localized or consistent across individual patients.
 
 Project Structure
+```
 Bi-modal-GBM-Thickness-distributions-in-diabetic-patients/
 │
 ├── data/
@@ -171,6 +193,8 @@ Bi-modal-GBM-Thickness-distributions-in-diabetic-patients/
 ├── requirements.txt
 ├── README.md
 └── LICENSE
+
+```
 Expected Outcomes
 
 The expected outcomes of this project include:
