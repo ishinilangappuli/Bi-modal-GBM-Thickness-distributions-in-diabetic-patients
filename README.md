@@ -33,10 +33,4 @@ To guarantee precise physical measurements in nanometers ($\text{nm}$):
 
 ---
 
-## 📁 Repository Structure
 
-```text
-├── gbm_analysis.py                # Main image processing & measurement script
-├── gbm_thickness_results.csv      # Exported per-image statistical metrics
-├── global_gbm_distribution.png    # Calibrated global thickness histogram
-└── README.md                      # Project documentation
