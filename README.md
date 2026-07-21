@@ -1,40 +1,42 @@
-# Glomerular Basement Membrane (GBM) Thickness Analysis
+# Quantitative Evaluation & Multi-Modal Analysis of Glomerular Basement Membrane (GBM) Thickness Distributions in Diabetic Patients
 
-This repository contains the Python implementation for the automated evaluation, true-scale calibration, and distribution analysis of Glomerular Basement Membrane (GBM) thickness in diabetic patients.
+## 📌 Project Context & Problem Statement
+Glomerular Basement Membrane (GBM) thickening is a hallmark pathological feature of Diabetic Kidney Disease (DKD). However, regional variations and multi-modal thickness trends across continuous membrane segments are often obscured in standard single-point estimations. 
 
----
-
-## 📌 Project Overview & Objectives
-The primary objective of this project is to quantitatively analyze GBM thickness profiles from Transmission Electron Microscopy (TEM) images to investigate structural variations—specifically looking for **bi-modal or multi-modal thickness trends** in diabetic conditions.
-
-### Key Methodology:
-* **True Physical Calibration:** Evaluates true nanometer-scale dimensions by calibrating pixel density directly against image scale bars ($1\ \mu\text{m} = 1010\text{ pixels} \implies 0.9901\text{ nm/pixel}$).
-* **Fine-Grained Segmentation:** Measures orthogonal thickness continuously along the membrane's centerline, treating each continuous component as an independent physical sample.
-* **Image Processing Pipeline:** Utilizes binary thresholding, morphological closing (`scipy.ndimage`), Distance Transform (`distance_transform_edt`), and Skeletonization (`skimage.morphology`) to ensure unbiased orthogonal thickness extraction.
+This project aims to implement an automated image processing and statistical modeling pipeline to quantify local orthogonal thickness profiles from **Transmission Electron Microscopy (TEM)** images and evaluate structural thickness distributions (specifically identifying bi-modal or multi-modal patterns).
 
 ---
 
-## 🚀 Current Implementation & Progress
+## 🔬 Scientific & Technical Methodology
 
-### 1. Calibrated Processing Pipeline (`gbm_analysis.py`)
-* **Scale Calibration:** Updated the pixel-to-nanometer factor to **$0.9901\text{ nm/pixel}$** based on TEM scale bar analysis ($1\ \text{pixel} \approx 1\text{ nm}$).
-* **Noise & Artifact Filtering:** Implemented validation bounds ($10.0\text{ nm} - 1500.0\text{ nm}$) to remove boundary artifacts and micro-noise.
-* **Automated Data Extraction:** Automatically parses `Patient_ID` and `Glomerulus` metadata from filenames and outputs summary metrics (`Mean`, `Median`, `Std Dev`) to CSV.
+### 1. True Physical Scale Calibration
+To guarantee precise physical measurements in nanometers ($\text{nm}$):
+* Scale bar calibration was conducted directly on high-magnification ($10,500\times$, $80\text{ kV}$) TEM micrographs.
+* A $1\ \mu\text{m}$ ($1000\text{ nm}$) scale bar corresponds to $1010\text{ pixels}$, establishing an exact scale factor of **$0.9901\text{ nm/pixel}$** ($1\text{ pixel} \approx 1\text{ nm}$).
 
-### 2. Preliminary Findings & Distribution Analysis
-* **Global Distribution:** Calibrated thickness profiles exhibit a characteristic right-skewed log-normal shape.
-* **Multi-Modal Trends:** The calibrated global histogram reveals distinct secondary peaks and shoulders, supporting the hypothesis of localized structural membrane thickening in diabetic samples.
-* **Calibrated Stratification Scheme:**
-  * **Thin:** $< 50.0\text{ nm}$
-  * **Normal:** $50.0\text{ nm} - 100.0\text{ nm}$
-  * **Thick:** $> 100.0\text{ nm}$
+### 2. Automated Image Processing Pipeline (`gbm_analysis.py`)
+* **Preprocessing & Binarization:** Converts TEM segment masks into cleaned binary structures using morphological closing (`scipy.ndimage`).
+* **Centerline Extraction:** Computes the membrane skeleton (`skimage.morphology.skeletonize`) to trace the medial line.
+* **Orthogonal Distance Transform:** Applies Exact Euclidean Distance Transform (`scipy.ndimage.distance_transform_edt`) to derive true local orthogonal thicknesses along every skeleton point ($2 \times \text{distance} \times 0.9901\text{ nm}$).
+* **Noise Filtering:** Applies physical validation boundaries ($10.0\text{ nm} - 1500.0\text{ nm}$) to eliminate boundary artifacts.
+
+---
+
+## 📊 Current Progress & Key Findings
+
+1. **Automated Feature Extraction:** Successfully processed TEM image datasets, extracting continuous thickness measurements along thousands of evaluation points.
+2. **Global Distribution Profile:** Initial calibrated global distributions demonstrate a right-skewed profile with secondary shoulders/peaks, supporting the hypothesis of heterogeneous, localized membrane thickening in diabetic conditions.
+3. **Structured Classification Framework:**
+   * **Thin Membrane Segment:** $< 50.0\text{ nm}$
+   * **Normal Membrane Segment:** $50.0\text{ nm} - 100.0\text{ nm}$
+   * **Thickened Membrane Segment:** $> 100.0\text{ nm}$
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-├── images/                        # Raw TEM binary masks / dataset
-├── gbm_analysis.py                # Main analysis & calibration pipeline
-├── gbm_thickness_results.csv      # Exported statistical summary per component
-└── global_gbm_distribution.png    # Output global calibrated histogram
+├── gbm_analysis.py                # Main image processing & measurement script
+├── gbm_thickness_results.csv      # Exported per-image statistical metrics
+├── global_gbm_distribution.png    # Calibrated global thickness histogram
+└── README.md                      # Project documentation
