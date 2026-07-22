@@ -23,7 +23,8 @@ Glomerular Basement Membrane (GBM) thickening is a key structural indicator of D
 * Observed that calibrated thickness distributions show a right-skewed profile with potential secondary peaks/shoulders, supporting the hypothesis of localized membrane thickening.
 
 ---
-![Graph showing a GBM thickness distribution histogram with a dominant thicker mode and secondary peak annotations, illustrating potential bimodal variation in diabetic glomerular basement membrane measurements](gbm_plot.png)
+![Global GBM Thickness Distribution](global_gbm_distribution.png)
+
 ## 🔮 What Needs To Be Done Next (Tasks Ahead)
 
 - [ ] **Patient-Level Data Aggregation:** Group thickness statistics per `Patient_ID` and specific glomeruli to separate within-patient variability from between-patient differences.
