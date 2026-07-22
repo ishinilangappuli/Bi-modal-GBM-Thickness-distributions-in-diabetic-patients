@@ -23,7 +23,7 @@ Glomerular Basement Membrane (GBM) thickening is a key structural indicator of D
 * Observed that calibrated thickness distributions show a right-skewed profile with potential secondary peaks/shoulders, supporting the hypothesis of localized membrane thickening.
 
 ---
-![Global GBM Thickness Distribution](global_gbm_distribution.PNG)
+![Global GBM Thickness Distribution](global_gbm_distribution.png)
 
 ## 🔮 What Needs To Be Done Next (Tasks Ahead)
 
