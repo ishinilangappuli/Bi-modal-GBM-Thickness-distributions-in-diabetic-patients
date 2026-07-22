@@ -1,4 +1,4 @@
-# Quantitative Analysis of Glomerular Basement Membrane (GBM) Thickness Distributions in Diabetic Patients
+# Quantitative Analysis of Glomerular Basement Membrane (GBM) Thickness Distributions in Diabetic Patients 
 
 ## 🎯 What Does This Project Mean? (Project Context)
 Glomerular Basement Membrane (GBM) thickening is a key structural indicator of Diabetic Kidney Disease (DKD). Standard clinical evaluations often rely on basic manual spot-checks, which miss local variations across the membrane. 
