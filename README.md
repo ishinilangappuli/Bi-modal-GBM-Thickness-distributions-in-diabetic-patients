@@ -49,5 +49,5 @@ Glomerular Basement Membrane (GBM) thickening is a key structural indicator of D
 - [x] **Patient-Level Data Aggregation:** Grouped thickness statistics per `Patient_ID` and analyzed cohort variability.
 - [x] **Patient Comparison Charts:** Generated mean thickness comparison bar charts with clinical threshold overlays.
 - [ ] **Statistical Multi-Modality Testing:** Apply Kernel Density Estimation (KDE) and Gaussian Mixture Model (GMM) fitting to mathematically confirm bi-modal or multi-modal trends.
-- [ ] **Dataset Expansion:** Run the calibrated pipeline across remaining patient TEM images.
-- [ ] **Spatial Analysis:** Generate heatmaps and spatial profiles along membrane skeletons for thesis documentation.
+
+
