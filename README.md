@@ -39,8 +39,8 @@ Glomerular Basement Membrane (GBM) thickening is a key structural indicator of D
 ---
 
 ### 2. Mean GBM Thickness per Patient
-![Mean GBM Thickness per Patient](mean_gbm_thickness_per_patient.png)
-> **Figure 2:** Aggregated mean thickness values across 11 patient cases with clinical reference thresholds ($50\text{ nm}$ and $100\text{ nm}$).
+![Patient thickness comparison](patient_thickness_comparison.png)
+> **Figure 2:** Comparison of GBM thickness of 11 patients. ($50\text{ nm}$ and $100\text{ nm}$).
 
 ---
 
