@@ -184,6 +184,16 @@ A lower BIC indicates better model fitting.
 
 File: 04_plot_gmm.py
 
+This script shows:
+
+- Observed thickness histogram
+- Gaussian components
+- Estimated peaks
+
+Example output: gmm_fit_07-25.png
+
+
+
 ---
 
 # Results
