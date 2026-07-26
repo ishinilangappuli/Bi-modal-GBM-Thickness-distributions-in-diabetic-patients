@@ -204,9 +204,6 @@ This script shows:
 - Estimated peaks
 
 Example output: gmm_fit_07-25.png
-![GMM](figures/gmm_fit_07-25.png)
-
-
 
 ---
 
