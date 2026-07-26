@@ -299,6 +299,12 @@ diptest
 matplotlib
 seaborn
 
+Install:
+
+```bash
+pip install numpy pandas opencv-python scipy scikit-image scikit-learn diptest matplotlib seaborn
+```
+
 # How to Run
 
 Run scripts in order:
