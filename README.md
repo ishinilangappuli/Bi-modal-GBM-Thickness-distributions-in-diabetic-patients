@@ -42,23 +42,36 @@ are provided.
 # Analysis Workflow
 
 The complete workflow is:
-
+```text
 TEM Images
--->
+|
+|
+v
 Scale Calibration
 (automatic scale bar detection)
--->
+|
+|
+v
 GBM Segmentation Masks
--->
+|
+|
+v
 Thickness Extraction
 (Medial Axis + Distance Transform)
--->
+|
+|
+v
 Thickness Distribution Analysis
--->
+|
+|
+v
 Multimodality Testing
 (Hartigan Dip Test + Gaussian Mixture Model)
--->
+|
+|
+v
 Visualization
+```
 
 ---
 
