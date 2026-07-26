@@ -17,16 +17,16 @@ The dataset consists of TEM images collected from **11 diabetic patients**.
 Each patient contains multiple GBM images sampled from different glomeruli and positions.
 
 Patient IDs:
-01-24
-02-24
-03-24
-04-23
-05-24
-06-24
-07-25
-08-25
-09-24
-10-24
+01-24,
+02-24,
+03-24,
+04-23,
+05-24,
+06-24,
+07-25,
+08-25,
+09-24,
+10-24,
 11-24
 
 For each image:
