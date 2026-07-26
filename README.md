@@ -198,8 +198,6 @@ Example output: gmm_fit_07-25.png
 
 # Results
 
-The analysis generates:
-
 ## Thickness Results
 gbm_thickness_summary.csv
 
@@ -234,39 +232,46 @@ gmm_fit_patientID.png
 
 ---
 
-# Repository Structure
-Bi-modal-GBM-Thickness-distributions-in-diabetic-patients
+## Repository Structure
 
-│
-├── images/
-│
-├── refined_masks/
+```text
+Bi-modal-GBM-Thickness-distributions-in-diabetic-patients/
+
 │
 ├── 01_scale_calibration.py
+│   └── Automatic extraction of image-specific scale calibration (nm/pixel)
 │
-├── 02_gbm_thickness_extraction.py
+├── 02_gbm_thickness_extractor.py
+│   └── GBM component separation, medial axis extraction, and thickness measurement
 │
-├── 03_multimodality_analysis.py
+├── 03_thickness_distribution_analysis.py
+│   └── Patient-wise thickness distribution visualization
 │
-├── 04_plot_gmm.py
+├── 04_multimodality_analysis.py
+│   └── Hartigan's Dip Test and Gaussian Mixture Model (GMM) analysis
+│
+├── 05_gmm_visualization.py
+│   └── Visualization of GMM peak decomposition
 │
 ├── scale_calibration.csv
+│   └── Image-specific nm/pixel calibration values
 │
 ├── gbm_thickness_summary.csv
+│   └── Mean, median, and statistical thickness values for each membrane component
 │
 ├── gbm_raw_thickness.csv
+│   └── Individual thickness measurements along the membrane medial axis
 │
 ├── gbm_multimodality_summary.csv
+│   └── Statistical results of multimodality analysis
 │
 ├── figures/
-│ |
-│ ├── gbm_median_boxplot.png
-│ ├── gbm_kde_distribution.png
-│ └── gmm_fit_patientID.png
+│   ├── gbm_distribution_boxplot.png
+│   ├── gbm_kde_distribution.png
+│   └── gmm_fit_examples.png
 │
 └── README.md
-
----
+```
 
 # Requirements
 
