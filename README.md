@@ -236,6 +236,7 @@ Contains:
 
 Generated figures:
 gbm_median_boxplot.png
+![Boxplot](figures/gbm_median_boxplot.png)
 
 gbm_kde_distribution.png
 
