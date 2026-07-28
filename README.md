@@ -2,11 +2,13 @@
 
 ## Overview
 
-This project investigates the distribution of Glomerular Basement Membrane (GBM) thickness in diabetic patients using Transmission Electron Microscopy (TEM) images.
+This project presents an automated image analysis pipeline for quantifying Glomerular Basement Membrane (GBM) thickness from Transmission Electron Microscopy (TEM) images of diabetic patients. The pipeline combines image processing techniques, morphometric thickness measurement, and statistical modelling to investigate whether GBM thickness distributions are unimodal or multimodal across patients.
+
+Local GBM thickness is estimated from manually refined segmentation masks using skeletonization and the Euclidean Distance Transform. Patient-specific thickness distributions are subsequently analysed using Hartigan's Dip Test and Gaussian Mixture Models (GMMs), with model selection based on the Bayesian Information Criterion (BIC) and Akaike Information Criterion (AIC).
 
 The main objective is to characterize the variability of GBM thickness and investigate whether diabetic GBM thickness distributions show **unimodal or multimodal (bi-modal) behaviour**.
 
-Each segmented membrane component is considered as an independent sample, following the methodology proposed by Curti et al.
+Connected component analysis is performed to identify individual GBM segments. Each connected membrane segment is treated as an independent measurement unit, following the methodology proposed by Curti et al.
 
 ---
 
@@ -42,35 +44,38 @@ are provided.
 # Analysis Workflow
 
 The complete workflow is:
+
 ```text
-TEM Images
-|
-|
-v
-Scale Calibration
-(automatic scale bar detection)
-|
-|
-v
-GBM Segmentation Masks
-|
-|
-v
-Thickness Extraction
-(Medial Axis + Distance Transform)
-|
-|
-v
-Thickness Distribution Analysis
-|
-|
-v
-Multimodality Testing
-(Hartigan Dip Test + Gaussian Mixture Model)
-|
-|
-v
-Visualization
+Raw TEM Images
+        │
+        ▼
+Manual / Refined GBM Masks
+        │
+        ▼
+Medial Axis Transform
+        │
+        ▼
+Euclidean Distance Transform
+        │
+        ▼
+Thickness Measurement (nm)
+        │
+        ▼
+gbm_thickness_summary.csv
+        │
+        ▼
+Per-patient Statistical Analysis
+        │
+        ├── Hartigan's Dip Test
+        ├── Gaussian Mixture Models (1–3 components)
+        ├── AIC/BIC Model Comparison
+        └── Best Model Selection
+        │
+        ▼
+Outputs
+    ├── GMM plots for each patient
+    ├── GMM_all_patients_summary.csv
+    └── Statistical interpretation
 ```
 
 ---
@@ -121,13 +126,13 @@ Each separated membrane component is considered as an independent sample.
 
 ### Medial axis extraction
 
-The centre line of each membrane is obtained using: skimage.morphology.medial_axis
+The centreline of each segmented GBM component is extracted using the Medial Axis Transform (skimage.morphology.medial_axis). Unlike simple skeletonization, the medial axis preserves the distance of each centreline pixel to the nearest membrane boundary, making it well suited for local thickness estimation.
 
 ### Thickness estimation
 
-The distance transform gives the local radius.
+The Euclidean Distance Transform (EDT) is computed simultaneously with the medial axis. For each pixel on the medial axis, the EDT provides the shortest distance to the membrane boundary, corresponding to the local membrane radius. Local GBM thickness is then calculated as:
 
-Thickness is calculated as: Thickness = 2 × distance_transform × nm_per_pixel
+Thickness is calculated as: Thickness (nm) = 2 × EDT × nm_per_pixel
 
 Outputs: gbm_thickness_summary.csv
 
@@ -177,11 +182,7 @@ indicates multimodal behaviour
 
 ## Gaussian Mixture Model (GMM)
 
-Gaussian Mixture Models with:
-1 components
-2 components
-3 components 
-are fitted.
+Gaussian Mixture Models with one, two and three Gaussian components are fitted to each patient's thickness distribution.
 
 The best model is selected using:
 
@@ -195,19 +196,25 @@ A lower BIC indicates better model fitting.
 
 # 5. GMM Visualization
 
-File: 04_plot_gmm.py
+File: 04_plot_gmm_fits.ipynb
 
-This script shows:
+Each generated figure includes:
 
-- Observed thickness histogram
-- Gaussian components
-- Estimated peaks
+• Observed thickness histogram
+• Kernel Density Estimate (KDE)
+• Overall fitted Gaussian Mixture Model
+• Individual Gaussian components
+• Estimated Gaussian means
+• Dip Test statistics
+• BIC and AIC values
 
 Example output: gmm_fit_07-25.png
 
 ---
 
 # Results
+
+The analysis produces quantitative GBM thickness measurements for every segmented membrane component and evaluates each patient's thickness distribution for evidence of multimodality using Hartigan's Dip Test and Gaussian Mixture Models.
 
 ## Thickness Results
 gbm_thickness_summary.csv
@@ -219,6 +226,11 @@ Contains:
 - Membrane component ID
 - Median thickness
 - Mean thickness
+- Standard Deviation of thickness
+- Minimum thickness
+- Maximum thickness
+- Number of measurement
+- Resolution in nm per pixel
 
 
 ## Multimodality Results
@@ -230,59 +242,67 @@ Contains:
 - Multimodality classification
 - Best GMM component number
 - Estimated thickness peaks
+- BIC
+- AIC
+- Gaussian peaks (1,2,3)
+- Gaussian weights
+- Multimodality strength classification
 
 
 ## Visualization Outputs
 
 Generated figures:
-gbm_median_boxplot.png
-![Boxplot](figures/gbm_median_boxplot.png)
-
-gbm_kde_distribution.png
-
-gmm_fit_patientID.png
-
+GMM_patient_01-24.png
+GMM_patient_02-24.png
+GMM_patient_03-24.png
+GMM_patient_04-23.png
+GMM_patient_05-24.png
+GMM_patient_06-24.png
+GMM_patient_07-25.png
+GMM_patient_08-25.png
+GMM_patient_09-24.png
+GMM_patient_10-24.png
+GMM_patient_11-24.png
 ---
 
 ## Repository Structure
 
 ```text
-Bi-modal-GBM-Thickness-distributions-in-diabetic-patients/
+Bi-modal-GBM-Thickness-Distributions-in-Diabetic-Patients/
+│
+├── data/
+│   ├── TEM_images/                    # Original TEM images
+│   ├── refined_masks/                 # Refined binary GBM segmentation masks
+│   └── calibration/                   # Image scale information
+│
+├── results/
+│   ├── scale_calibration.csv          # Image-specific calibration (nm/pixel)
+│   ├── gbm_raw_thickness.csv          
+│   ├── gbm_thickness_summary.csv      
+│   ├── gbm_thickness_analysis.csv
+|   ├── gbm_multimodality_summary.csv
+|   ├── GMM_all_patients_summary.csv   # Dip Test and GMM summary for all patients
+|   └── GMM_plots/
+│       ├── GMM_patient_01-24.png
+│       ├── GMM_patient_02-24.png
+│       ├── ...
+│       └── GMM_patient_11-24.png
+│
+├── scripts/
+│   ├── 01_scale_calibration.ipynb
+│   │   └── Automatic extraction of image-specific scale calibration (nm/pixel)
+│   │
+│   ├── 02_gbm_thickness_extraction.ipynb
+│   │   └── Medial axis extraction and GBM thickness measurement
+│   │
+│   ├── 03_gbm_thickness_distribution.ipynb
+│   │   └── Hartigan's Dip Test, GMM fitting and BIC/AIC model selection
+│   │
+│   └── 04_plot_gmm_fits.py
+│       └── Generates GMM visualizations for every patient
+|
+├── README.md
 
-│
-├── 01_scale_calibration.py
-│   └── Automatic extraction of image-specific scale calibration (nm/pixel)
-│
-├── 02_gbm_thickness_extractor.py
-│   └── GBM component separation, medial axis extraction, and thickness measurement
-│
-├── 03_thickness_distribution_analysis.py
-│   └── Patient-wise thickness distribution visualization
-│
-├── 04_multimodality_analysis.py
-│   └── Hartigan's Dip Test and Gaussian Mixture Model (GMM) analysis
-│
-├── 05_gmm_visualization.py
-│   └── Visualization of GMM peak decomposition
-│
-├── scale_calibration.csv
-│   └── Image-specific nm/pixel calibration values
-│
-├── gbm_thickness_summary.csv
-│   └── Mean, median, and statistical thickness values for each membrane component
-│
-├── gbm_raw_thickness.csv
-│   └── Individual thickness measurements along the membrane medial axis
-│
-├── gbm_multimodality_summary.csv
-│   └── Statistical results of multimodality analysis
-│
-├── figures/
-│   ├── gbm_distribution_boxplot.png
-│   ├── gbm_kde_distribution.png
-│   └── gmm_fit_examples.png
-│
-└── README.md
 ```
 
 # Requirements
@@ -296,29 +316,22 @@ scikit-image
 scikit-learn
 diptest
 matplotlib
-seaborn
-
-Install:
-
-```bash
-pip install numpy pandas opencv-python scipy scikit-image scikit-learn diptest matplotlib seaborn
-```
 
 # How to Run
 
 Run scripts in order:
 
 Step 1
-python 01_scale_calibration.py
+01_scale_calibration.ipynb
 
 Step 2
-python 02_gbm_thickness_extraction.py
+02_gbm_thickness_extraction.ipynb
 
 Step 3
-python 03_multimodality_analysis.py
+03_gbm_thickness_distribution.ipynb
 
 Step 4
-python 04_plot_gmm.py
+04_plot_gmm_fits.ipynb
 
 Reference
 
