@@ -252,17 +252,17 @@ Contains:
 ## Visualization Outputs
 
 Generated figures:
-GMM_patient_01-24.png
-GMM_patient_02-24.png
-GMM_patient_03-24.png
-GMM_patient_04-23.png
-GMM_patient_05-24.png
-GMM_patient_06-24.png
-GMM_patient_07-25.png
-GMM_patient_08-25.png
-GMM_patient_09-24.png
-GMM_patient_10-24.png
-GMM_patient_11-24.png
+- GMM_patient_01-24.png
+- GMM_patient_02-24.png
+- GMM_patient_03-24.png
+- GMM_patient_04-23.png
+- GMM_patient_05-24.png
+- GMM_patient_06-24.png
+- GMM_patient_07-25.png
+- GMM_patient_08-25.png
+- GMM_patient_09-24.png
+- GMM_patient_10-24.png
+- GMM_patient_11-24.png
 ---
 
 ## Repository Structure
