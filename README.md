@@ -276,10 +276,8 @@ Bi-modal-GBM-Thickness-Distributions-in-Diabetic-Patients/
 │   └── calibration/                   # Image scale information
 │
 ├── results/
-│   ├── scale_calibration.csv          # Image-specific calibration (nm/pixel)
-│   ├── gbm_raw_thickness.csv          
+│   ├── scale_calibration.csv          # Image-specific calibration (nm/pixel)         
 │   ├── gbm_thickness_summary.csv      
-│   ├── gbm_thickness_analysis.csv
 |   ├── gbm_multimodality_summary.csv
 |   ├── GMM_all_patients_summary.csv   # Dip Test and GMM summary for all patients
 |   └── GMM_plots/
