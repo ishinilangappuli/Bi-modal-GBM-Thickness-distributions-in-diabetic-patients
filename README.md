@@ -200,13 +200,13 @@ File: 04_plot_gmm_fits.ipynb
 
 Each generated figure includes:
 
-• Observed thickness histogram
-• Kernel Density Estimate (KDE)
-• Overall fitted Gaussian Mixture Model
-• Individual Gaussian components
-• Estimated Gaussian means
-• Dip Test statistics
-• BIC and AIC values
+- Observed thickness histogram
+- Kernel Density Estimate (KDE)
+- Overall fitted Gaussian Mixture Model
+- Individual Gaussian components
+- Estimated Gaussian means
+- Dip Test statistics
+- BIC and AIC values
 
 Example output: gmm_fit_07-25.png
 
