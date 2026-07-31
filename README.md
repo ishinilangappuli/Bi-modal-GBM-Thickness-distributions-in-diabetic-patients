@@ -809,6 +809,7 @@ Curti et al. "Automated evaluation of glomerular basement membrane thickness usi
 GitHub repository: https://github.com/Nico-Curti/glomerular-basement-membrane 
 
 Author Name: Ishini Langappuli 
+
 Institution: University of Bologna Master Degree in Physics
 
 
