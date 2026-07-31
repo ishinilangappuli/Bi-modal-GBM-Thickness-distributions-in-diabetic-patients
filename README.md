@@ -200,13 +200,13 @@ File: 04_plot_gmm_fits.ipynb
 
 Each generated figure includes:
 
-• Observed thickness histogram
-• Kernel Density Estimate (KDE)
-• Overall fitted Gaussian Mixture Model
-• Individual Gaussian components
-• Estimated Gaussian means
-• Dip Test statistics
-• BIC and AIC values
+- Observed thickness histogram
+- Kernel Density Estimate (KDE)
+- Overall fitted Gaussian Mixture Model
+- Individual Gaussian components
+- Estimated Gaussian means
+- Dip Test statistics
+- BIC and AIC values
 
 Example output: gmm_fit_07-25.png
 
@@ -276,10 +276,8 @@ Bi-modal-GBM-Thickness-Distributions-in-Diabetic-Patients/
 │   └── calibration/                   # Image scale information
 │
 ├── results/
-│   ├── scale_calibration.csv          # Image-specific calibration (nm/pixel)
-│   ├── gbm_raw_thickness.csv          
+│   ├── scale_calibration.csv          # Image-specific calibration (nm/pixel)         
 │   ├── gbm_thickness_summary.csv      
-│   ├── gbm_thickness_analysis.csv
 |   ├── gbm_multimodality_summary.csv
 |   ├── GMM_all_patients_summary.csv   # Dip Test and GMM summary for all patients
 |   └── GMM_plots/
