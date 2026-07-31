@@ -1,10 +1,6 @@
 # Quantitative Analysis of GBM Thickness Distribution and Structural Heterogeneity in Diabetic Patients Using Statistical Modelling
 
-# Quantitative Characterization of Bi-Modal Glomerular Basement Membrane (GBM) Thickness Distributions in Diabetic Patients
-
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Domain](https://img.shields.io/badge/Domain-Renal%20Pathology%20%7C%20Electron%20Microscopy-red.svg)]()
 
 ## Overview
 
